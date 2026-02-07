@@ -1,17 +1,28 @@
 
-# Empirical Analysis of Distributionally Robust Optimization under Group and Distribution Shifts
+# Empirical Analysis of Distributionally Robust Optimization  
+### under Group and Distribution Shifts
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Focus-Distributional%20Robustness-blue" />
+  <img src="https://img.shields.io/badge/Data-Tabular%20Decision%20Systems-green" />
+  <img src="https://img.shields.io/badge/Status-Research%20in%20Progress-orange" />
+</p>
+
+---
+
+## Overview
 
 This repository contains an empirical research project studying how different learning objectives behave under **distributional uncertainty** in tabular decision-making problems. The project compares **Empirical Risk Minimization (ERM)** with **Distributionally Robust Optimization (DRO)** and **Group-DRO**, focusing on robustness–accuracy trade-offs and optimization behavior.
 
-The goal is not to propose new algorithms, but to **understand when and why robust objectives succeed or fail**  under realistic distribution shifts.
+The goal is not to propose new algorithms, but to **understand when and why robust objectives succeed or fail** under realistic distribution shifts.
 
-
+---
 
 ## Motivation
 
-Machine learning models deployed in real decision systems often face conditions that differ from their training data. Population characteristics shift, subgroup proportions change, and errors are distributed unevenly across sub-populations. Models optimized for average-case performance may therefore perform poorly on vulnerable or underrepresented groups.
+Machine learning models deployed in real decision systems often face conditions that differ from their training data. Population characteristics shift, subgroup proportions change, and errors are unevenly distributed across sub-populations. Models optimized for average-case performance may therefore perform poorly on minority or high-risk groups.
 
-Distributionally robust learning frameworks attempt to address these issues by optimizing against worst-case losses. However, robust objectives can introduce trade-offs such as reduced average accuracy, slower convergence, or unstable optimization dynamics. This project empirically studies these effects in a controlled and reproducible setting.
+Distributionally robust learning frameworks attempt to mitigate these failures by optimizing against worst-case losses. However, robust objectives introduce trade-offs such as reduced average accuracy, slower convergence, or unstable optimization dynamics. This project empirically studies these effects in a controlled and reproducible setting.
 
 ---
 
@@ -24,30 +35,34 @@ To empirically compare **ERM**, **DRO**, and **Group-DRO** on tabular credit-ris
 - convergence behavior of robust objectives  
 - sensitivity to uncertainty set size  
 
-
+---
 
 ## Datasets
 
-- **Primary:** HELOC Credit Risk Dataset  
-- **Secondary (stress-test):** German Credit Dataset  
+| Role | Dataset |
+|-----|--------|
+| Primary | HELOC Credit Risk Dataset |
+| Secondary | German Credit Dataset (stress-test) |
 
 Both datasets involve binary classification in decision-sensitive contexts and are suitable for subgroup robustness analysis.
 
-
+---
 
 ## Model Choice
 
-To isolate the effects of optimization objectives from architectural complexity, this project uses **logistic regression** as the base model. This allows clearer interpretation of convergence behavior and robustness effects.
+To isolate the effects of optimization objectives from architectural complexity, this project uses **logistic regression** as the base model. This enables clearer interpretation of convergence behavior and robustness effects.
 
-
+---
 
 ## Learning Objectives
 
-- **ERM:** Standard empirical risk minimization using binary cross-entropy  
-- **DRO:** CVaR-style tail-risk minimization with uncertainty size controlled via a parameter `alpha`  
-- **Group-DRO:** Worst-case loss minimization across predefined groups using adversarial reweighting  
+| Objective | Description |
+|---------|-------------|
+| ERM | Standard empirical risk minimization using binary cross-entropy |
+| DRO | CVaR-style tail-risk minimization with uncertainty size controlled by `alpha` |
+| Group-DRO | Worst-case loss minimization across predefined groups using adversarial reweighting |
 
-
+---
 
 ## Group Construction
 
@@ -59,30 +74,28 @@ Groups are derived from interpretable sub-populations such as:
 
 These groupings enable analysis of worst-case subgroup performance without framing the study as a fairness intervention.
 
-
+---
 
 ## Distribution Shift Scenarios
 
-The following shifts are introduced to simulate deployment mismatch:
+1. **Temporal shift** – training on earlier samples, evaluating on later samples  
+2. **Subpopulation shift** – downsampling one group during training while preserving natural proportions at test time  
+3. **Label-noise shift (optional)** – injecting asymmetric noise into one selected group  
 
-1. **Temporal shift:** training on earlier samples and evaluating on later samples  
-2. **Subpopulation shift:** downsampling one group during training while preserving natural proportions at test time  
-3. **Label-noise shift (optional):** injecting asymmetric noise into one selected group  
-
-
+---
 
 ## Evaluation Metrics
 
-Reported metrics include:
-
+**Primary metrics**
 - overall accuracy  
 - worst-group accuracy  
 - expected calibration error (ECE)  
 - robustness gap (worst-group accuracy − average accuracy)  
 
-Additional diagnostics include variance of group losses across training.
+**Additional diagnostics**
+- variance of group losses  
 
-
+---
 
 ## Convergence Analysis
 
@@ -92,8 +105,6 @@ Optimization behavior is analyzed by tracking:
 - worst-group loss over iterations  
 - adversarial group weights in Group-DRO  
 - sensitivity of convergence to the DRO uncertainty parameter  
-
-
 
 ## Repository Structure
 
@@ -109,10 +120,9 @@ robust-ml-credit/
 ├── README.md
 └── report.pdf
 
-
-
-
 ## Status
 
 This repository is under active development. Core objective implementations and experimental scaffolding are in place, with ongoing work focused on systematic evaluation and analysis.
+
+
 
