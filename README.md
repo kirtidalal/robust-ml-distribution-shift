@@ -106,20 +106,6 @@ Optimization behavior is analyzed by tracking:
 - adversarial group weights in Group-DRO  
 - sensitivity of convergence to the DRO uncertainty parameter  
 
-## Repository Structure
-
-robust-ml-credit/
-|-- data/
-|-- models/
-|-- objectives/
-|   |-- erm.py
-|   |-- dro.py
-|   |-- group_dro.py
-|-- experiments/
-|-- plots/
-|-- README.md
-`-- report.pdf
-
 
 ## Status
 
