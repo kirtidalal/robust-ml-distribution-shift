@@ -107,18 +107,17 @@ Optimization behavior is analyzed by tracking:
 - sensitivity of convergence to the DRO uncertainty parameter  
 
 ## Repository Structure
-
 robust-ml-credit/
 ├── data/
-├── models/
 ├── objectives/
-│ ├── erm.py
-│ ├── dro.py
-│ └── group_dro.py
+│   ├── erm.py
+│   ├── dro.py
+│   └── group_dro.py
+├── train.py
 ├── experiments/
 ├── plots/
-├── README.md
-└── report.pdf
+└── README.md
+
 
 ## Status
 
